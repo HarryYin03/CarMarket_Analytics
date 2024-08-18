@@ -12,10 +12,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <Highlight />,
   },
+  {
+    basename: "/CarMarket_Analytics",
+  }
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+function Root() {
+  return <RouterProvider router={router} />;
+}
+
+export default Root;
