@@ -2,7 +2,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: '/car-market-analytics/', // Specify the base URL for your application
+  
   plugins: [react()],
+  
   build: {
     rollupOptions: {
       output: {
