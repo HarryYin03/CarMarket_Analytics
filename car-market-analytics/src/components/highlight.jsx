@@ -3,6 +3,7 @@ import carsData from "../taladrod-cars.min.json";
 import "../index.css";
 
 
+
 export default function Highlight() {
     // Replace useState with useLocalStorage
     const [highlightedCars, setHighlightedCars] = useLocalStorage('highlightedCars', []);
