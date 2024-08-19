@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   base: '/carmarket_analytics/',  // Ensure this matches your deployment base
   plugins: [react()],
-  build: {
+  
+d: {
     rollupOptions: {
       output: {
         manualChunks: {
