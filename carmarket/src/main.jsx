@@ -22,7 +22,10 @@ function Navbar() {
   );
 }
 
-// Set basename to '/car-market-analytics' if your app is served from that subdirectory
+// Determine basename based on environment
+const isProduction = process.env.NODE_ENV === 'production';
+const basename = isProduction ? "/CarMarket_Analytics" : "/";
+
 const router = createBrowserRouter(
   [
     {
@@ -44,7 +47,9 @@ const router = createBrowserRouter(
       ),
     },
   ],
-
+  {
+    basename: basename, // Dynamic basename based on environment
+  }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
