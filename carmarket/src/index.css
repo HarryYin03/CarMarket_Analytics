@@ -1,5 +1,6 @@
-/* Container styling */
-.container {
+/* General Container Styling */
+.container,
+.dashboard {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -9,16 +10,20 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading styling */
+/* Headings Styling */
 .container h1,
-.container h2 {
+.container h2,
+.dashboard h1,
+.dashboard h2 {
   color: #343a40;
   margin-bottom: 20px;
   text-align: center;
   font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
 }
 
-/* Grid container for highlighted cars */
+/* Grid Container for Highlighted Cars */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -26,7 +31,7 @@
   margin-bottom: 40px;
 }
 
-/* Grid item styling for highlighted cars */
+/* Grid Item Styling for Highlighted Cars */
 .grid-item {
   position: relative;
   background-color: #ffffff;
@@ -43,6 +48,11 @@
   height: auto;
   border-radius: 8px;
   margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.grid-item img:hover {
+  transform: scale(1.05);
 }
 
 .grid-item span {
@@ -68,13 +78,13 @@
   background-color: #c82333;
 }
 
-/* Hover effect on grid items */
+/* Hover Effect on Grid Items */
 .grid-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Styling for the Select Cars to Highlight section */
+/* Styling for the Select Cars to Highlight Section */
 .select-cars .grid-item button {
   background-color: #007bff;
 }
@@ -83,7 +93,7 @@
   background-color: #0056b3;
 }
 
-/* Check mark styling */
+/* Check Mark Styling */
 .check-mark {
   position: absolute;
   top: 10px;
@@ -100,8 +110,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Add this CSS to your index.css or navbar.css file */
-
+/* Navbar Styling */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -132,41 +141,19 @@
   font-weight: bold;
 }
 
-/* Active link styling */
+/* Active Link Styling */
 .navbar a.active {
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-decoration-color: #f8f9fa;
 }
 
-/* Dashboard Specific Styling */
-.dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Roboto', sans-serif;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  /* Center the content */
-}
-
-/* Heading styling */
-.dashboard h1,
-.dashboard h2 {
-  color: #343a40;
-  margin-bottom: 20px;
-  font-weight: 700;
-}
-
-/* Table styling */
+/* Dashboard Table Styling */
 table {
   width: 100%;
   margin: 0 auto;
   border-collapse: collapse;
   text-align: center;
-  /* Center table content */
 }
 
 table thead {
@@ -184,13 +171,12 @@ table tbody tr:nth-child(even) {
   background-color: #f3f3f3;
 }
 
-/* Adjusting margin for table to center properly */
 .dashboard table {
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Chart Styling */
+/* Chart Container Styling */
 .charts {
   display: flex;
   justify-content: space-between;
@@ -198,10 +184,8 @@ table tbody tr:nth-child(even) {
   margin-top: 40px;
   margin-bottom: 40px;
   padding-left: 20px;
-  /* Additional padding to move the charts */
 }
 
-/* Chart Container Styling */
 .chart-container {
   flex: 1;
   background: #f9fafb;
@@ -221,7 +205,6 @@ table tbody tr:nth-child(even) {
 
 .chart-container canvas {
   max-width: 90%;
-  /* Adjust size of the chart */
   height: auto;
   margin: 0 auto;
 }
@@ -260,4 +243,33 @@ table tbody tr:nth-child(even) {
   .charts {
     flex-direction: column;
   }
+}
+
+/* Filter Container */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filter-container label {
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.filter-container select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #343a40;
+  transition: border-color 0.3s ease;
+}
+
+.filter-container select:focus {
+  border-color: #007bff;
+  outline: none;
 }
