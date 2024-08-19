@@ -1,5 +1,5 @@
 import MyChartComponent from './chart';
-import carsData from '../taladrod-cars.min.json';
+import carsData from '../taladrod-cars.json';
 import '../index.css';
 
 export default function Dashboard() {
@@ -9,16 +9,21 @@ export default function Dashboard() {
         const model = car.Model;
         const price = parseInt(car.Prc.replace(/,/g, '')); // Convert price to an integer
 
+        // Initialize brand if not already present
         if (!acc[brand]) {
-            acc[brand] = { models: {} };
+            acc[brand] = { totalValue: 0, totalCars: 0, models: {} };
         }
 
+        // Initialize model under the brand if not already present
         if (!acc[brand].models[model]) {
             acc[brand].models[model] = { totalValue: 0, count: 0 };
         }
 
+        // Accumulate total value and count for the brand and model
         acc[brand].models[model].totalValue += price;
         acc[brand].models[model].count += 1;
+        acc[brand].totalValue += price;
+        acc[brand].totalCars += 1;
 
         return acc;
     }, {});
@@ -47,6 +52,26 @@ export default function Dashboard() {
                                 <td>{brandModelData[brand].models[model].totalValue.toLocaleString()}</td>
                             </tr>
                         ))
+                    ))}
+                </tbody>
+            </table>
+
+            <h2>Total Cars and Values by Brand</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Total Number of Cars</th>
+                        <th>Total Value (Baht)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {Object.keys(brandModelData).map(brand => (
+                        <tr key={brand}>
+                            <td>{brand}</td>
+                            <td>{brandModelData[brand].totalCars}</td>
+                            <td>{brandModelData[brand].totalValue.toLocaleString()}</td>
+                        </tr>
                     ))}
                 </tbody>
             </table>

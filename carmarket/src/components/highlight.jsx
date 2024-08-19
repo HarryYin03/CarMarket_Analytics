@@ -1,5 +1,5 @@
 import { useLocalStorage } from "react-use";
-import carsData from "../taladrod-cars.min.json";
+import carsData from "../taladrod-cars.json";
 import "../index.css";
 
 

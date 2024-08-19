@@ -1,10 +1,26 @@
 import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import carsData from '../taladrod-cars.min.json';
+import carsData from "../taladrod-cars.json";
 
 const MyChartComponent = () => {
     const pieRef = useRef(null);
     const barRef = useRef(null);
+
+    // Function to generate a random color
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+
+    // Generate colors for the pie chart
+    const colors = Object.keys(carsData.Cars.reduce((acc, car) => {
+        acc[car.NameMMT.split(' ')[0]] = true;
+        return acc;
+    }, {})).map(() => getRandomColor());
 
     // Data processing for charts
     const brandModelCount = carsData.Cars.reduce((acc, car) => {
@@ -13,16 +29,11 @@ const MyChartComponent = () => {
             acc[brand] = { totalValue: 0, modelCount: 0 };
         }
         acc[brand].totalValue += parseInt(car.Prc.replace(/,/g, ''));
-        acc[brand].modelCount += 1; // Counting models under each brand
+        acc[brand].modelCount += 1;
         return acc;
     }, {});
 
-    const colors = [
-        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-        '#FF9F40', '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
-        '#9966FF', '#FF9F40', '#FF6384', '#36A2EB', '#FFCE56'
-    ];
-
+    // Pie chart data
     const pieData = {
         labels: Object.keys(brandModelCount),
         datasets: [
@@ -35,6 +46,7 @@ const MyChartComponent = () => {
         ]
     };
 
+    // Bar chart data
     const barData = {
         labels: Object.keys(brandModelCount),
         datasets: [
@@ -42,7 +54,7 @@ const MyChartComponent = () => {
                 label: '# of Models',
                 data: Object.keys(brandModelCount).map(brand => brandModelCount[brand].modelCount),
                 backgroundColor: colors,
-                barThickness: 20, // Increased bar thickness
+                barThickness: 20,
             }
         ],
     };
@@ -80,14 +92,13 @@ const MyChartComponent = () => {
                     },
                     plugins: {
                         legend: {
-                            display: false, // remove legend on bar chart
+                            display: false,
                         },
                     },
                 },
             });
         }
 
-        // Cleanup on unmount
         return () => {
             if (pieChartInstance) pieChartInstance.destroy();
             if (barChartInstance) barChartInstance.destroy();
@@ -96,14 +107,14 @@ const MyChartComponent = () => {
 
     return (
         <div className="charts">
-            <div className="chart-container" style={{ width: '500px', height: '500px' }}> {/* Increased size */}
+            <div className="chart-container" style={{ width: '600px', height: '600px' }}>
                 <h2>Cars by Brand</h2>
-                <canvas id="myPieChart" ref={pieRef} width="500" height="500" /> {/* Increased size */}
+                <canvas id="myPieChart" ref={pieRef} width="600" height="600" />
             </div>
 
-            <div className="chart-container" style={{ width: '500px', height: '500px' }}> {/* Increased size */}
+            <div className="chart-container" style={{ width: '600px', height: '600px' }}>
                 <h2>Models of Each Brand</h2>
-                <canvas id="myBarChart" ref={barRef} width="500" height="500" /> {/* Increased size */}
+                <canvas id="myBarChart" ref={barRef} width="600" height="600" />
             </div>
         </div>
     );
