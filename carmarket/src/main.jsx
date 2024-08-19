@@ -47,9 +47,9 @@ const router = createBrowserRouter(
       ),
     },
   ],
-  {
-    basename: basename, // Dynamic basename based on environment
-  }
+  // {
+  //   basename: '/CarMarket_Analytics/', // Dynamic basename based on environment
+  // }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
