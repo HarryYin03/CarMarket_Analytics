@@ -44,7 +44,7 @@ const router = createBrowserRouter(
       ),
     },
   ],
-  { basename: "/carmarket-analytics/" }
+
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -1,15 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-export default defineConfig(({ command }) => {
-  const config = {
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => {
+  return {
+    base: mode === 'production' ? '/CarMarket_Analytics/' : '/', // Set base only for production
     plugins: [react()],
-    base: "/carmarket-analytics/",
-  };
-
-  if (command === 'build') {
-    // Apply chunking only in production
-    config.build = {
+    build: {
       rollupOptions: {
         output: {
           manualChunks: {
@@ -18,8 +15,6 @@ export default defineConfig(({ command }) => {
           },
         },
       },
-    };
-  }
-
-  return config;
+    },
+  };
 });
