@@ -22,29 +22,32 @@ function Navbar() {
   );
 }
 
-const router = createBrowserRouter([
+// Set basename to '/car-market-analytics' if your app is served from that subdirectory
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: (
+        <>
+          <Navbar />
+          <Highlight />
+        </>
+      ),
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <>
+          <Navbar />
+          <Dashboard />
+        </>
+      ),
+    },
+  ],
   {
-    path: "/",
-    element: (
-      <>
-        <Navbar />
-        <Highlight />
-      </>
-    ),
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <>
-        <Navbar />
-        <Dashboard />
-      </>
-    ),
-  },
-  {
-    basename: "/car-market-analytics",
+    basename: "/carmarket_analytics", // Add this line
   }
-]);
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

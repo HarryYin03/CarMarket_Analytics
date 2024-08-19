@@ -4,13 +4,22 @@ import '../index.css';
 
 export default function Dashboard() {
     // Data processing for the table
-    const brandModelCount = carsData.Cars.reduce((acc, car) => {
+    const brandModelData = carsData.Cars.reduce((acc, car) => {
         const brand = car.NameMMT.split(' ')[0]; // Assuming the brand is the first word in NameMMT
+        const model = car.Model;
+        const price = parseInt(car.Prc.replace(/,/g, '')); // Convert price to an integer
+
         if (!acc[brand]) {
-            acc[brand] = { totalValue: 0, models: {} };
+            acc[brand] = { models: {} };
         }
-        acc[brand].totalValue += parseInt(car.Prc.replace(/,/g, ''));
-        acc[brand].models[car.Model] = (acc[brand].models[car.Model] || 0) + 1;
+
+        if (!acc[brand].models[model]) {
+            acc[brand].models[model] = { totalValue: 0, count: 0 };
+        }
+
+        acc[brand].models[model].totalValue += price;
+        acc[brand].models[model].count += 1;
+
         return acc;
     }, {});
 
@@ -29,13 +38,13 @@ export default function Dashboard() {
                     </tr>
                 </thead>
                 <tbody>
-                    {Object.keys(brandModelCount).map(brand => (
-                        Object.keys(brandModelCount[brand].models).map(model => (
+                    {Object.keys(brandModelData).map(brand => (
+                        Object.keys(brandModelData[brand].models).map(model => (
                             <tr key={`${brand}-${model}`}>
                                 <td>{brand}</td>
                                 <td>{model}</td>
-                                <td>{brandModelCount[brand].models[model]}</td>
-                                <td>{brandModelCount[brand].totalValue.toLocaleString()}</td>
+                                <td>{brandModelData[brand].models[model].count}</td>
+                                <td>{brandModelData[brand].models[model].totalValue.toLocaleString()}</td>
                             </tr>
                         ))
                     ))}

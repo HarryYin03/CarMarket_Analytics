@@ -2,17 +2,17 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/car-market-analytics/',
+  base: '/carmarket_analytics/',  // Ensure this matches your deployment base
   plugins: [react()],
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendors': ['react', 'react-dom', 'react-router-dom'],
-          'chart-js': ['chart.js']
-        }
-      }
+          'react-vendor': ['react', 'react-dom'],
+          'chart-vendor': ['chart.js', 'react-chartjs-2'],
+          // Add more manual chunks as necessary based on your project needs
+        },
+      },
     },
-    chunkSizeWarningLimit: 1000, // Increase the chunk size warning limit
-  }
+  },
 });

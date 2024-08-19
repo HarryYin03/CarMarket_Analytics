@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { Pie, Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import carsData from '../taladrod-cars.min.json';
 
@@ -11,10 +10,10 @@ const MyChartComponent = () => {
     const brandModelCount = carsData.Cars.reduce((acc, car) => {
         const brand = car.NameMMT.split(' ')[0];
         if (!acc[brand]) {
-            acc[brand] = { totalValue: 0, models: {} };
+            acc[brand] = { totalValue: 0, modelCount: 0 };
         }
         acc[brand].totalValue += parseInt(car.Prc.replace(/,/g, ''));
-        acc[brand].models[car.Model] = (acc[brand].models[car.Model] || 0) + 1;
+        acc[brand].modelCount += 1; // Counting models under each brand
         return acc;
     }, {});
 
@@ -29,9 +28,7 @@ const MyChartComponent = () => {
         datasets: [
             {
                 label: '# of Cars',
-                data: Object.keys(brandModelCount).map(brand =>
-                    Object.values(brandModelCount[brand].models).reduce((a, b) => a + b, 0)
-                ),
+                data: Object.keys(brandModelCount).map(brand => brandModelCount[brand].modelCount),
                 backgroundColor: colors,
                 hoverBackgroundColor: colors
             }
@@ -40,12 +37,14 @@ const MyChartComponent = () => {
 
     const barData = {
         labels: Object.keys(brandModelCount),
-        datasets: Object.keys(brandModelCount).map((brand, index) => ({
-            label: brand,
-            data: [Object.values(brandModelCount[brand].models).reduce((a, b) => a + b, 0)],
-            backgroundColor: colors[index],
-            barThickness: 20, // Increased bar thickness
-        })),
+        datasets: [
+            {
+                label: '# of Models',
+                data: Object.keys(brandModelCount).map(brand => brandModelCount[brand].modelCount),
+                backgroundColor: colors,
+                barThickness: 20, // Increased bar thickness
+            }
+        ],
     };
 
     useEffect(() => {
