@@ -48,7 +48,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/carmarket_analytics/",
+    basename: "/carmarket/",
   }
 );
 

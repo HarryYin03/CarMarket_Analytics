@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 
 export default defineConfig({
-  base: '/carmarket_analytics/',  // Ensure this is set correctly for GitHub Pages
+  base: '/carmarket/',  // Ensure this is set correctly for GitHub Pages
   plugins: [react()],
   build: {
     rollupOptions: {
