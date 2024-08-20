@@ -22,9 +22,7 @@ function Navbar() {
   );
 }
 
-// Determine basename based on environment
-const isProduction = process.env.NODE_ENV === 'production';
-const basename = isProduction ? "/CarMarket_Analytics" : "/";
+
 
 const router = createBrowserRouter(
   [
@@ -48,7 +46,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/carmarket/",
+    basename: "/carmarket_analytics/",
   }
 );
 

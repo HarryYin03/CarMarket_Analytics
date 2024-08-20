@@ -3,16 +3,18 @@ import react from '@vitejs/plugin-react';
 
 
 export default defineConfig({
-  base: '/carmarket/',  // Ensure this is set correctly for GitHub Pages
+  base: '/carmarket_analytics/',  // Ensure this matches your deployment base
   plugins: [react()],
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-chart': ['chart.js', 'react-chartjs-2'],
+          'react-vendor': ['react', 'react-dom'],
+          'chart-vendor': ['chart.js', 'react-chartjs-2'],
+          // Add more manual chunks as necessary based on your project needs
         },
       },
     },
   },
+
 });
