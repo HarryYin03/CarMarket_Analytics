@@ -25,11 +25,15 @@ const MyChartComponent = () => {
     // Data processing for charts
     const brandModelCount = carsData.Cars.reduce((acc, car) => {
         const brand = car.NameMMT.split(' ')[0];
+        const model = car.NameMMT.split(' ')[1] || 'Unknown Model';
         if (!acc[brand]) {
-            acc[brand] = { totalValue: 0, modelCount: 0 };
+            acc[brand] = {};
         }
-        acc[brand].totalValue += parseInt(car.Prc.replace(/,/g, ''));
-        acc[brand].modelCount += 1;
+        if (!acc[brand][model]) {
+            acc[brand][model] = { count: 0, totalValue: 0 };
+        }
+        acc[brand][model].count += 1;
+        acc[brand][model].totalValue += parseInt(car.Prc.replace(/,/g, ''));
         return acc;
     }, {});
 
@@ -39,25 +43,32 @@ const MyChartComponent = () => {
         datasets: [
             {
                 label: '# of Cars',
-                data: Object.keys(brandModelCount).map(brand => brandModelCount[brand].modelCount),
+                data: Object.keys(brandModelCount).map(brand => 
+                    Object.values(brandModelCount[brand]).reduce((sum, model) => sum + model.count, 0)
+                ),
                 backgroundColor: colors,
                 hoverBackgroundColor: colors
             }
         ]
     };
 
-    // Bar chart data
+    // Generate data for stacked bar chart
     const barData = {
         labels: Object.keys(brandModelCount),
-        datasets: [
-            {
-                label: '# of Models',
-                data: Object.keys(brandModelCount).map(brand => brandModelCount[brand].modelCount),
-                backgroundColor: colors,
-                barThickness: 20,
-            }
-        ],
+        datasets: []
     };
+
+    // Assign a unique color for each model
+    Object.keys(brandModelCount).forEach((brand, index) => {
+        Object.keys(brandModelCount[brand]).forEach((model, modelIndex) => {
+            const color = getRandomColor();
+            barData.datasets.push({
+                label: `${brand} ${model}`,
+                data: Object.keys(brandModelCount).map(b => (b === brand ? brandModelCount[brand][model]?.count || 0 : 0)),
+                backgroundColor: color
+            });
+        });
+    });
 
     useEffect(() => {
         let pieChartInstance;
@@ -77,14 +88,19 @@ const MyChartComponent = () => {
                 },
             });
         }
+
         if (barRef.current) {
             barChartInstance = new Chart(barRef.current.getContext('2d'), {
                 type: 'bar',
                 data: barData,
                 options: {
                     scales: {
+                        x: {
+                            stacked: true,
+                        },
                         y: {
                             beginAtZero: true,
+                            stacked: true,
                             ticks: {
                                 stepSize: 1,
                             },
@@ -92,7 +108,7 @@ const MyChartComponent = () => {
                     },
                     plugins: {
                         legend: {
-                            display: false,
+                            display: true,
                         },
                     },
                 },
