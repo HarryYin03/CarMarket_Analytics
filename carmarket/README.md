@@ -5,10 +5,9 @@ The Car Market Analytics project is built using React. It consists of two main p
 
 (1) Highlighted Page:
 ----------
-
     ![Highlighted Page](/images/highlightedpage.png)
 
-(2)Dashboard Page:
+(2) Dashboard Page:
 ----------
     ![Dashboard Page](/images/dashboardpage.png)
 
