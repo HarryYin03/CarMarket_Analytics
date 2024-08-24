@@ -194,6 +194,7 @@ table tbody tr:nth-child(even) {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
+  
 }
 
 .chart-container h2 {
@@ -203,11 +204,6 @@ table tbody tr:nth-child(even) {
   margin-bottom: 10px;
 }
 
-.chart-container canvas {
-  max-width: 90%;
-  height: auto;
-  margin: 0 auto;
-}
 
 /* Legend Styling */
 .legend-container {

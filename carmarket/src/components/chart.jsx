@@ -108,7 +108,8 @@ const MyChartComponent = () => {
                     },
                     plugins: {
                         legend: {
-                            display: true,
+                            display: false,
+                            position: 'bottom',
                         },
                     },
                 },
@@ -122,15 +123,16 @@ const MyChartComponent = () => {
     }, [pieData, barData]);
 
     return (
-        <div className="charts">
-            <div className="chart-container" style={{ width: '600px', height: '600px' }}>
-                <h2>Cars by Brand</h2>
-                <canvas id="myPieChart" ref={pieRef} width="600" height="600" />
+        <div className="">
+            <div className="chart-container" style={{ marginLeft: 25 + "%", width: 500}}>
+                <h2>Cars by Brand</h2>,
+                <canvas id="myPieChart" ref={pieRef}  />
             </div>
 
-            <div className="chart-container" style={{ width: '600px', height: '600px' }}>
+            <div className="chart-container" style={{ }}>
                 <h2>Models of Each Brand</h2>
-                <canvas id="myBarChart" ref={barRef} width="600" height="600" />
+                <canvas id="myBarChart" ref={barRef}
+                 />
             </div>
         </div>
     );

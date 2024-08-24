@@ -1,41 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocalStorage } from "react-use";
 import carsData from "../taladrod-cars.json";
 import "../index.css";
 
 export default function Highlight() {
-    // Replace useState with useLocalStorage
     const [highlightedCars, setHighlightedCars] = useLocalStorage('highlightedCars', []);
     const [selectedBrand, setSelectedBrand] = useState("All");
 
-    // Check if a car is already highlighted
+    useEffect(() => {
+        console.log("Highlighted Cars:", highlightedCars);
+    }, [highlightedCars]);
+
     const isHighlighted = (Cid) => {
         return highlightedCars.some(car => car.Cid === Cid);
     };
 
-    // Function to highlight a car
     const highlightCar = (car) => {
         if (!isHighlighted(car.Cid)) {
             setHighlightedCars([...highlightedCars, car]);
         }
     };
 
-    // Function to remove a car from highlights
     const removeCar = (Cid) => {
         setHighlightedCars(highlightedCars.filter(car => car.Cid !== Cid));
     };
 
-    // Function to handle brand filtering
     const handleBrandFilter = (event) => {
         setSelectedBrand(event.target.value);
     };
 
-    // Filtered cars based on selected brand
     const filteredCars = selectedBrand === "All"
         ? carsData.Cars
         : carsData.Cars.filter(car => car.NameMMT.split(' ')[0] === selectedBrand);
 
-    // Extract unique brands for filter options
     const uniqueBrands = ["All", ...new Set(carsData.Cars.map(car => car.NameMMT.split(' ')[0]))];
 
     return (
@@ -56,7 +53,6 @@ export default function Highlight() {
 
             <h2>Select Cars to Highlight</h2>
 
-            {/* Brand filter dropdown */}
             <div className="filter-container">
                 <label htmlFor="brandFilter">Filter by Brand: </label>
                 <select id="brandFilter" value={selectedBrand} onChange={handleBrandFilter}>
