@@ -1,23 +1,33 @@
 Project 01: Car Market Analytics 
 =====================================
 
-The Car Market Analytics project is built using React. It consists of two main pages: 
+The Car Market Analytics project is built using React.js with React Routing and we use Local Storage for persistance. It consists of two main pages: 
 
-1.0 Highlighted Page:
-----------
-![Highlighted Page](/images/highlightedpage.png)
-
-2.0 Dashboard Page:
+1.0 Dashboard Page:
 ----------
 ![Dashboard Page](/images/dashboardpage.png)
 
+2.0 Highlighted Page:
+----------
+Highlighted cars page 
+
+The page shows highlighted cars 
+
+Select cars to be shown on the page. 
+
+Remove cars from highlight page 
+
+On reload, the highlighted items persists. 
+
+![Highlighted Page](/images/highlightedpage.png)
+
 The Dashboard Page displays a list of cars with details such as model, brand, number of cars and total value. It also includes visualizations in the form of a pie chart and a stacked bar chart.
 
-2.1 Piechart:
+1.1 Piechart:
 ----------
 ![Pie Chart](/images/piechart.png)
 
-2.2 Stacked Barchart:
+1.2 Stacked Barchart:
 ----------
 ![Stacked Bar Chart](/images/stackedbarchart.png)
 
