@@ -9,8 +9,6 @@ The Car Market Analytics project is built using React.js with React Routing and 
 
 2.0 Highlighted Page:
 ----------
-Highlighted cars page 
-
 The page shows highlighted cars 
 
 Select cars to be shown on the page. 
