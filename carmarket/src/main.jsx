@@ -15,8 +15,8 @@ function Navbar() {
     <nav className="navbar">
       <div className="logo">Car Market</div>
       <div>
-        <Link to="/" style={{ marginRight: "15px" }}>Highlighted</Link>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/highlight" style={{ marginRight: "15px" }}>Highlighted</Link>
+        <Link to="/">Dashboard</Link>
       </div>
     </nav>
   );
@@ -31,16 +31,16 @@ const router = createBrowserRouter(
       element: (
         <>
           <Navbar />
-          <Highlight />
+          <Dashboard />
         </>
       ),
     },
     {
-      path: "/dashboard",
+      path: "/highlight",
       element: (
         <>
           <Navbar />
-          <Dashboard />
+          <Highlight />
         </>
       ),
     },
